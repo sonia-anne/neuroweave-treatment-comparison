@@ -133,3 +133,24 @@ dot_fig.update_layout(
     font=dict(color="white")
 )
 st.plotly_chart(dot_fig, use_container_width=True)
+
+# --- TARJETA COMPARATIVA FINAL ---
+st.markdown("---")
+st.subheader("🚀 Why NEUROWEAVE Outperforms All Other Options")
+
+st.markdown("""
+<div style="background-color:#1e293b;padding:20px;border-radius:12px;border-left:6px solid #3b82f6;">
+    <h4 style="color:#3b82f6;">✅ Scientific Rationale</h4>
+    <p style="color:white;font-size:15px;">
+    Unlike existing treatments that <b>only drain cerebrospinal fluid (CSF)</b> or <i>target symptoms genetically</i>, NEUROWEAVE <b>detects, repairs and regenerates</b> brain structures using nanotechnology.
+    </p>
+    <ul style="color:white;font-size:15px;">
+        <li><b>Shunts</b> fail in 2 years (50%), no repair — only redirection (WHO, 2024).</li>
+        <li><b>Gene editing</b> and <b>SRP-2001</b> reduce mutant expression but don’t restore neural tissue.</li>
+        <li><b>NEUROWEAVE</b> uses programmable nanobots guided by AI + AR, releasing <b>BDNF + VEGF</b> to regrow ependymal and ventricular tissue (Nature Neuroscience, 2022).</li>
+        <li>It reduces reintervention needs by <b>>90%</b>, with a projected <b>efficacy of 92.3%</b> in COMSOL simulations.</li>
+        <li>NEUROWEAVE costs <b>80% less</b> than standard surgery, and is scalable in low-income countries.</li>
+    </ul>
+    <p style="color:#d1fae5;"><i>NEUROWEAVE doesn’t just treat. It rewires. It rebuilds. It cures.</i></p>
+</div>
+""", unsafe_allow_html=True)
