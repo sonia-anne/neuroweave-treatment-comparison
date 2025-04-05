@@ -133,26 +133,3 @@ dot_fig.update_layout(
     font=dict(color="white")
 )
 st.plotly_chart(dot_fig, use_container_width=True)
-
-# --- TARJETA DE JUSTIFICACIÓN CIENTÍFICA ---
-
-st.markdown("---")
-st.subheader("📍 Why NEUROWEAVE Wins Scientifically")
-
-with st.container():
-    st.markdown("""
-    <div style="background-color:#1e293b;padding:20px;border-radius:12px;border-left:5px solid #38bdf8;">
-        <h4 style="color:#38bdf8;">🧬 Scientific Superiority of NEUROWEAVE</h4>
-        <p style="color:white;font-size:15px;">
-        Unlike traditional shunts with <b>~50% failure in 2 years</b> and zero regenerative capability, NEUROWEAVE offers:
-        </p>
-        <ul style="color:white;">
-            <li><b>92.3% simulated efficacy</b> (COMSOL 2025)</li>
-            <li><b>Self-guided nanorobots</b> for targeted action — not just drainage</li>
-            <li><b>Release of BDNF & VEGF</b> for neuroregeneration (Nature, 2022)</li>
-            <li><b>Cost: ~$1,200</b> vs $10,000–15,000 (80% reduction)</li>
-            <li>Scalable to low-resource settings using <b>AR + AI-guided surgery</b></li>
-        </ul>
-        <p style="color:white;"><i>NEUROWEAVE is not an improvement. It's a paradigm shift in how we treat hydrocephalus.</i></p>
-    </div>
-    """, unsafe_allow_html=True)
