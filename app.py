@@ -22,7 +22,7 @@ data = [
 df = pd.DataFrame(data, columns=categories, index=treatments)
 
 # --- 1. Radar Chart ---
-st.header("🕸️ Radar Chart: Multidimensional Treatment Profile")
+st.header("🕸️ Multidimensional Treatment Profile")
 radar_fig = go.Figure()
 for i, treatment in enumerate(df.index):
     radar_fig.add_trace(go.Scatterpolar(
@@ -43,7 +43,7 @@ radar_fig.update_layout(
 st.plotly_chart(radar_fig, use_container_width=True)
 
 # --- 2. Parallel Coordinates Plot ---
-st.header("📊 Parallel Coordinates: Evaluation Flow")
+st.header("📊 Evaluation Flow")
 parallel_fig = px.parallel_coordinates(
     df.reset_index(),
     color="Efficacy",
@@ -53,7 +53,7 @@ parallel_fig = px.parallel_coordinates(
 st.plotly_chart(parallel_fig, use_container_width=True)
 
 # --- 3. Sankey Diagram ---
-st.header("🔀 Sankey Diagram: Resource Flow to Outcomes")
+st.header("🔀 Resource Flow to Outcomes")
 sankey_fig = go.Figure(data=[go.Sankey(
     node=dict(
         pad=15,
@@ -80,7 +80,7 @@ sankey_fig.update_layout(
 st.plotly_chart(sankey_fig, use_container_width=True)
 
 # --- 4. Violin + Box Plot ---
-st.header("🎻 Violin + Box Plot: Cost Distribution")
+st.header("🎻 Cost Distribution")
 cost_df = pd.DataFrame({
     "Treatment": treatments,
     "Cost": [10000, 8000, 15000, 13000, 11000, 1200]
@@ -97,7 +97,7 @@ violin_fig.update_layout(
 st.plotly_chart(violin_fig, use_container_width=True)
 
 # --- 5. Treemap ---
-st.header("🧩 Treemap: Value by Category per Treatment")
+st.header("🧩 Value by Category per Treatment")
 flat_data = []
 for i, treatment in enumerate(treatments):
     for j, cat in enumerate(categories):
@@ -113,7 +113,7 @@ treemap_fig.update_layout(
 st.plotly_chart(treemap_fig, use_container_width=True)
 
 # --- 6. Dot Plot with Confidence ---
-st.header("📌 Dot Plot: Efficacy Confidence Intervals")
+st.header("📌 Efficacy Confidence Intervals")
 dot_fig = go.Figure()
 for i, treatment in enumerate(treatments):
     dot_fig.add_trace(go.Scatter(
