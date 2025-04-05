@@ -1,123 +1,94 @@
 import streamlit as st
 import plotly.graph_objects as go
-import pandas as pd
-import plotly.express as px
 
-st.set_page_config(page_title="NEUROWEAVE – Comparative Intelligence Panel", layout="wide", page_icon="🧠")
+# --- PAGE CONFIG ---
+st.set_page_config(page_title="NEUROWEAVE Pyramid Comparison", layout="wide", page_icon="🧠")
 
-# --- Estilo Oscuro Personalizado ---
+# --- DARK STYLING ---
 st.markdown("""
     <style>
-        .main { background-color: #0f172a; color: white; }
-        .block-container { padding: 2rem; }
-        h1, h2, h3, h4 { color: #3b82f6; text-align: center; }
-        .card { background-color: #1e293b; border-radius: 12px; padding: 1.5rem; margin: 0.5rem 0; }
-        ul { list-style: none; padding: 0; }
-        li::before { content: "• "; color: #60a5fa; }
+        .main {
+            background-color: #0f172a;
+            color: white;
+        }
+        h1, h2 {
+            color: #60a5fa;
+            text-align: center;
+        }
+        .block-container {
+            padding: 2rem;
+        }
     </style>
 """, unsafe_allow_html=True)
 
-# --- Encabezado ---
-st.image("https://cdn-icons-png.flaticon.com/512/2700/2700656.png", width=80)
-st.title("NEUROWEAVE vs Traditional Shunt Systems")
-st.markdown("#### Matrix comparison + heatmap + panel cards — powered by real data and regenerative vision")
+# --- HEADER ---
+st.title("🔺 Tri-Level Comparative Pyramid")
+st.markdown("#### Scientific comparison between NEUROWEAVE and Traditional Shunt Systems based on performance, technology and impact.")
 
-# --- Tabla comparativa tipo heatmap ---
-data = {
-    "Criterion": [
-        "Effectiveness (%)",
-        "Failure Rate (2 yrs)",
-        "Risk of Complications",
-        "Fluid Strategy",
-        "Reinterventions",
-        "Patient Cost (USD)",
-        "Accessibility",
-        "Tissue Regeneration",
-        "Real-time Monitoring",
-        "AI Integration",
-        "Socioeconomic Impact"
-    ],
-    "Traditional Shunt": [
-        50, 50, 90,
-        1, 85, 10000,
-        20, 0, 0, 0, 30
-    ],
-    "NEUROWEAVE": [
-        92.3, 7, 10,
-        2, 5, 1200,
-        70, 100, 100, 100, 95
-    ]
-}
-df = pd.DataFrame(data)
+# --- DATA ---
+labels = [
+    "🧠 Clinical Effectiveness", "💥 Risk & Complications", "♻️ Reinterventions",
+    "💵 Direct Cost (USD)", "🌍 Global Accessibility", "🧬 Regenerative Capability",
+    "🤖 AI & Monitoring", "📈 Socioeconomic Impact"
+]
+traditional_scores = [50, 90, 85, 10000, 20, 0, 0, 30]
+neuro_scores = [92.3, 10, 5, 1200, 70, 100, 100, 95]
 
-fig = go.Figure(data=go.Heatmap(
-    z=df.iloc[:, 1:].values,
-    x=df.columns[1:],
-    y=df["Criterion"],
-    colorscale="Viridis",
-    colorbar=dict(title="Score"),
-    hoverongaps=False
+# --- PYRAMID BAR CHART ---
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    y=labels,
+    x=traditional_scores,
+    name='Traditional Shunt',
+    orientation='h',
+    marker=dict(color='crimson'),
+    hovertemplate='<b>Traditional Shunt:</b> %{x}<extra></extra>'
 ))
+
+fig.add_trace(go.Bar(
+    y=labels,
+    x=neuro_scores,
+    name='NEUROWEAVE',
+    orientation='h',
+    marker=dict(color='limegreen'),
+    hovertemplate='<b>NEUROWEAVE:</b> %{x}<extra></extra>'
+))
+
+# --- LAYOUT ---
 fig.update_layout(
-    title="🧪 Performance Matrix – Visual Comparison",
-    font=dict(color="white"), plot_bgcolor="#0f172a", paper_bgcolor="#0f172a",
-    title_font_size=22, margin=dict(t=60, l=50, r=50, b=50)
+    barmode='group',
+    title='NEUROWEAVE vs Traditional Shunt: Tri-Level Comparative Pyramid',
+    title_font_size=22,
+    plot_bgcolor='#0f172a',
+    paper_bgcolor='#0f172a',
+    font=dict(color='white', size=14),
+    xaxis=dict(title='Score / Cost (USD)', showgrid=True),
+    yaxis=dict(title='Evaluation Criteria'),
+    legend=dict(x=0.75, y=1.1, orientation='h')
 )
-fig.update_xaxes(tickfont=dict(color="white"))
-fig.update_yaxes(tickfont=dict(color="white"))
+
+# --- DISPLAY ---
 st.plotly_chart(fig, use_container_width=True)
 
-# --- Panel Visual Tipo Tarjeta ---
-st.markdown("### 🧠 Strategic Comparison Panel")
+# --- EXPLANATION ---
+st.markdown("### 🔎 Layered Comparison Breakdown")
+st.markdown("""
+**Level 1 – Clinical**  
+- 🧠 Effectiveness: NEUROWEAVE achieves 92.3% (COMSOL), vs 50% in traditional shunts.  
+- 💥 Complication risk: NEUROWEAVE uses autodestruction tech, reducing infection/blockage.
 
-col1, col2 = st.columns(2)
-with col1:
-    st.markdown("#### 💉 Traditional Shunt")
-    st.markdown("""
-    <div class="card">
-        <ul>
-        <li><b>Effectiveness:</b> 50%</li>
-        <li><b>Reinterventions:</b> Every 2–3 years</li>
-        <li><b>Complications:</b> High (infections, obstruction)</li>
-        <li><b>Monitoring:</b> ❌ None</li>
-        <li><b>Neuroregeneration:</b> ❌ None</li>
-        <li><b>Cost:</b> $5,000–$15,000</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+**Level 2 – Economic**  
+- 💵 Cost: Traditional surgeries = $5,000–$15,000. NEUROWEAVE ≈ $1,200 (mass production).  
+- ♻️ Reintervention: Shunts fail ~50% in 2 years. NEUROWEAVE = one-time nanointervention.
 
-with col2:
-    st.markdown("#### 🤖 NEUROWEAVE Nanotech")
-    st.markdown("""
-    <div class="card">
-        <ul>
-        <li><b>Effectiveness:</b> 92.3% (COMSOL)</li>
-        <li><b>Reinterventions:</b> One-time delivery</li>
-        <li><b>Complications:</b> Minimal (biodegradable)</li>
-        <li><b>Monitoring:</b> ✅ Real-time AR interface</li>
-        <li><b>Neuroregeneration:</b> ✅ BDNF & VEGF</li>
-        <li><b>Cost:</b> ~$1,200</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+**Level 3 – Technological & Societal**  
+- 🤖 AI Integration + AR: NEUROWEAVE includes real-time guidance.  
+- 🧬 Regeneration: Only NEUROWEAVE promotes BDNF/VEGF-based healing.  
+- 📈 Social Impact: NEUROWEAVE = school reintegration, rural access, long-term autonomy.
+""")
 
-# --- Diagrama Radar ---
-radar_data = pd.DataFrame({
-    "Criteria": ["Efficiency", "Cost", "Complication Risk", "AI Assist", "Neuroregeneration", "Accessibility"],
-    "Traditional Shunt": [50, 20, 30, 0, 0, 10],
-    "NEUROWEAVE": [92, 95, 90, 100, 100, 80]
-})
-
-radar_fig = px.line_polar(
-    radar_data.melt(id_vars=["Criteria"], var_name="Treatment", value_name="Score"),
-    r="Score", theta="Criteria", color="Treatment", line_close=True,
-    color_discrete_map={"Traditional Shunt": "#f43f5e", "NEUROWEAVE": "#3b82f6"},
-    title="📊 Multivariable Radar Chart Comparison"
-)
-radar_fig.update_layout(paper_bgcolor="#0f172a", font=dict(color="white"))
-st.plotly_chart(radar_fig, use_container_width=True)
-
-# --- Pie de Página ---
+# --- FOOTER ---
 st.markdown("---")
-st.success("This is not a dream. It's NEUROWEAVE — a real shift in neuroregenerative surgery.")
-st.caption("Created by Annette — Young Global Scientist from Ecuador. 🧠")
+st.success("This visualization proves that NEUROWEAVE isn't future fiction — it's scalable, ethical, and scientifically grounded.")
+st.caption("By Annette – Global Youth Scientist from Ecuador 🧠")
