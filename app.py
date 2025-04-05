@@ -1,94 +1,87 @@
-import streamlit as st
 import plotly.graph_objects as go
 
-# --- PAGE CONFIG ---
-st.set_page_config(page_title="NEUROWEAVE Pyramid Comparison", layout="wide", page_icon="🧠")
-
-# --- DARK STYLING ---
-st.markdown("""
-    <style>
-        .main {
-            background-color: #0f172a;
-            color: white;
-        }
-        h1, h2 {
-            color: #60a5fa;
-            text-align: center;
-        }
-        .block-container {
-            padding: 2rem;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# --- HEADER ---
-st.title("🔺 Tri-Level Comparative Pyramid")
-st.markdown("#### Scientific comparison between NEUROWEAVE and Traditional Shunt Systems based on performance, technology and impact.")
-
-# --- DATA ---
+# --- DATOS ORGANIZADOS POR NIVELES DE LA PIRÁMIDE ---
 labels = [
-    "🧠 Clinical Effectiveness", "💥 Risk & Complications", "♻️ Reinterventions",
-    "💵 Direct Cost (USD)", "🌍 Global Accessibility", "🧬 Regenerative Capability",
-    "🤖 AI & Monitoring", "📈 Socioeconomic Impact"
+    # Nivel clínico
+    "🧠 Efficacy",
+    "💥 Complication Risk",
+    "♻️ Reintervention Need",
+    # Nivel económico
+    "💵 Patient Cost (USD)",
+    "🌍 Global Accessibility",
+    # Nivel tecnológico / ético
+    "🧬 Tissue Regeneration",
+    "🤖 AI + Real-Time Monitoring",
+    "📈 Socioeconomic Impact"
 ]
-traditional_scores = [50, 90, 85, 10000, 20, 0, 0, 30]
-neuro_scores = [92.3, 10, 5, 1200, 70, 100, 100, 95]
 
-# --- PYRAMID BAR CHART ---
+# Valores estimados (cuantitativos o escalas)
+traditional = [50, 90, 85, 10000, 20, 0, 0, 30]
+neuro = [92.3, 10, 5, 1200, 70, 100, 100, 95]
+
+# Colores por categoría (niveles piramidales)
+colors_neuro = ['#00FFAB']*3 + ['#00C2FF']*2 + ['#FF61D2']*3
+colors_trad = ['#FF6B6B']*3 + ['#FFC93C']*2 + ['#A29BFE']*3
+
+# --- CONSTRUCCIÓN DEL GRÁFICO TIPO PIRÁMIDE ESCALONADA ---
 fig = go.Figure()
 
+# Barras para el tratamiento tradicional
 fig.add_trace(go.Bar(
     y=labels,
-    x=traditional_scores,
-    name='Traditional Shunt',
+    x=traditional,
+    name="Traditional Shunt",
     orientation='h',
-    marker=dict(color='crimson'),
-    hovertemplate='<b>Traditional Shunt:</b> %{x}<extra></extra>'
+    marker=dict(color=colors_trad),
+    hovertemplate="<b>Traditional:</b> %{x}<extra></extra>",
+    text=traditional,
+    textposition='auto'
 ))
 
+# Barras para NEUROWEAVE
 fig.add_trace(go.Bar(
     y=labels,
-    x=neuro_scores,
-    name='NEUROWEAVE',
+    x=neuro,
+    name="NEUROWEAVE",
     orientation='h',
-    marker=dict(color='limegreen'),
-    hovertemplate='<b>NEUROWEAVE:</b> %{x}<extra></extra>'
+    marker=dict(color=colors_neuro),
+    hovertemplate="<b>NEUROWEAVE:</b> %{x}<extra></extra>",
+    text=neuro,
+    textposition='auto'
 ))
 
-# --- LAYOUT ---
+# --- ESTILO Y CONFIGURACIÓN VISUAL ---
 fig.update_layout(
+    title="🔺 Tri-Level Pyramid Comparison: NEUROWEAVE vs Traditional Shunt",
+    title_font_size=24,
     barmode='group',
-    title='NEUROWEAVE vs Traditional Shunt: Tri-Level Comparative Pyramid',
-    title_font_size=22,
     plot_bgcolor='#0f172a',
     paper_bgcolor='#0f172a',
     font=dict(color='white', size=14),
-    xaxis=dict(title='Score / Cost (USD)', showgrid=True),
-    yaxis=dict(title='Evaluation Criteria'),
-    legend=dict(x=0.75, y=1.1, orientation='h')
+    xaxis=dict(
+        title="Quantitative Score / Cost (USD)",
+        title_font=dict(size=16),
+        showgrid=True,
+        gridcolor='gray',
+        linecolor='white',
+        tickfont=dict(color='white')
+    ),
+    yaxis=dict(
+        title="Evaluation Criteria",
+        tickfont=dict(size=15, color='white'),
+        categoryorder='array',
+        categoryarray=list(reversed(labels))  # Inversión visual para pirámide
+    ),
+    legend=dict(
+        orientation='h',
+        yanchor='bottom',
+        y=1.02,
+        xanchor='center',
+        x=0.5,
+        font=dict(size=14)
+    ),
+    margin=dict(l=80, r=80, t=80, b=80)
 )
 
-# --- DISPLAY ---
-st.plotly_chart(fig, use_container_width=True)
-
-# --- EXPLANATION ---
-st.markdown("### 🔎 Layered Comparison Breakdown")
-st.markdown("""
-**Level 1 – Clinical**  
-- 🧠 Effectiveness: NEUROWEAVE achieves 92.3% (COMSOL), vs 50% in traditional shunts.  
-- 💥 Complication risk: NEUROWEAVE uses autodestruction tech, reducing infection/blockage.
-
-**Level 2 – Economic**  
-- 💵 Cost: Traditional surgeries = $5,000–$15,000. NEUROWEAVE ≈ $1,200 (mass production).  
-- ♻️ Reintervention: Shunts fail ~50% in 2 years. NEUROWEAVE = one-time nanointervention.
-
-**Level 3 – Technological & Societal**  
-- 🤖 AI Integration + AR: NEUROWEAVE includes real-time guidance.  
-- 🧬 Regeneration: Only NEUROWEAVE promotes BDNF/VEGF-based healing.  
-- 📈 Social Impact: NEUROWEAVE = school reintegration, rural access, long-term autonomy.
-""")
-
-# --- FOOTER ---
-st.markdown("---")
-st.success("This visualization proves that NEUROWEAVE isn't future fiction — it's scalable, ethical, and scientifically grounded.")
-st.caption("By Annette – Global Youth Scientist from Ecuador 🧠")
+# --- MOSTRAR GRÁFICO ---
+fig.show()
