@@ -69,7 +69,7 @@ fig = go.Figure(data=[go.Table(
             "<b style='color:white;'>Traditional Shunt</b>",
             "<b style='color:white;'>NEUROWEAVE</b>"
         ],
-        fill_color="#1e3a8a",
+        fill_color="#2563eb",  # azul más brillante para mejor contraste
         font=dict(color="white", size=15),
         align="center",
         height=50
